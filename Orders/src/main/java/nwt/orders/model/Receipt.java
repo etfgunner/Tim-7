@@ -6,9 +6,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.lang.Nullable;
+import org.w3c.dom.ranges.RangeException;
 
 @EntityScan
 @Entity
@@ -17,15 +23,16 @@ public class Receipt {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
-    @Nullable
-    private Long rentalId;
-    @Nullable
+    @OneToOne
+    @JoinColumn(name = "id")
+    private Rental rental;
+    @Valid
     private Long transactionNumber;
-    @Nullable
+    @Valid
     private double price;
-    @Nullable
+    @Valid
     private double discount;
-    @Nullable
+    @Valid
     private Date dateCreated;
 
     public Receipt(){
@@ -38,14 +45,6 @@ public class Receipt {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getRentalId() {
-        return rentalId;
-    }
-
-    public void setRentalId(Long rentalId) {
-        this.rentalId = rentalId;
     }
 
     public Long getTransactionNumber() {
@@ -69,6 +68,7 @@ public class Receipt {
     }
 
     public void setDiscount(double discount) {
+    	if(discount<0 || discount>1) throw new ExceptionInInitializerError("Argument is out of range");
         this.discount = discount;
     }
 
@@ -80,11 +80,11 @@ public class Receipt {
         this.dateCreated = dateCreated;
     }
 
-    public Receipt(Long rentalId, Long transactionNumber, double price, double discount, Date dateCreated) {
-        this.rentalId = rentalId;
-        this.transactionNumber = transactionNumber;
-        this.price = price;
-        this.discount = discount;
-        this.dateCreated = dateCreated;
-    }
+	public Rental getRental() {
+		return rental;
+	}
+
+	public void setRental(Rental rental) {
+		this.rental = rental;
+	}
 }

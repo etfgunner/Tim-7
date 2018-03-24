@@ -4,6 +4,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 import org.springframework.lang.Nullable;
 
@@ -15,11 +20,13 @@ public class Returns {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Nullable
-    private Long rentalId;
-    @Nullable
+    @OneToOne
+    @JoinColumn(name = "id")
+    private Rental rental;
+    @Valid
     private Date dateReturn;
-    @Nullable
+    @Valid
+    @NotBlank
     private String reason;
 
     public Long getId() {
@@ -29,26 +36,21 @@ public class Returns {
     public Returns() {
     }
 
-    public Returns(Long rentalId, Date dateReturn, String reason) {
-        this.rentalId = rentalId;
-        this.dateReturn = dateReturn;
-        this.reason = reason;
-    }
 
     public void setId(Long id) {
 
         this.id = id;
     }
 
-    public Long getRentalId() {
-        return rentalId;
-    }
+    public Rental getRental() {
+		return rental;
+	}
 
-    public void setRentalId(Long rentalId) {
-        this.rentalId = rentalId;
-    }
+	public void setRental(Rental rental) {
+		this.rental = rental;
+	}
 
-    public Date getDateReturn() {
+	public Date getDateReturn() {
         return dateReturn;
     }
 

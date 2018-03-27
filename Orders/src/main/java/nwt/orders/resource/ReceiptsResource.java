@@ -73,7 +73,10 @@ public class ReceiptsResource {
 	 return receiptsRepository.save(receipt);
 		//return receiptsRepository.findAll();		
 	}
-	
+	@GetMapping(value="/price/{price}")
+	public List<Receipt> receiptsWithPriceLessThan(@PathVariable("price") Double price){
+		return receiptsRepository.findByPriceLessThan(price);
+	}
 	
 	
 }

@@ -1,5 +1,6 @@
 package nwt.orders.resource;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -72,5 +73,17 @@ public class RentalsResource {
 	 DateValidator.compareDates(rental.getDateFrom(), rental.getDateTo());
 	 return rentalsRepository.save(rental);
 		//return rentalsRepository.findAll();		
+	}
+	@GetMapping("/before/{date}")
+	public List<Rental> getRentalsBefore(@PathVariable(value = "date") String date) {
+		@SuppressWarnings("deprecation")
+		Date date1=new Date(date.replace('-','/'));
+	    return rentalsRepository.findByDateRentedBefore(date1);
+	}
+	@GetMapping("/after/{date}")
+	public List<Rental> getRentalsAfter(@PathVariable(value = "date") String date) {
+		@SuppressWarnings("deprecation")
+		Date date1=new Date(date.replace('-','/'));
+	    return rentalsRepository.findByDateRentedAfter(date1);
 	}
 }

@@ -1,5 +1,6 @@
 package nwt.orders.resource;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javassist.NotFoundException;
 import nwt.orders.DateValidator;
+import nwt.orders.model.Rental;
 import nwt.orders.model.Returns;
 import nwt.orders.model.Returns;
 import nwt.orders.repository.ReturnsRepository;
@@ -68,5 +70,11 @@ public class ReturnsResource {
 		DateValidator.validateDate(returns.getDateReturn());
 	 return returnsRepository.save(returns);
 		//return returnsRepository.findAll();		
+	}
+	@GetMapping("/after/{date}")
+	public List<Returns> getReturnsBefore(@PathVariable(value = "date") String date) {
+		@SuppressWarnings("deprecation")
+		Date date1=new Date(date.replace('-','/'));
+	    return returnsRepository.findByDateReturnBefore(date1);
 	}
 }

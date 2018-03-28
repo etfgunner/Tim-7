@@ -1,41 +1,66 @@
 package com.example.account_m.controller;
 
 import com.example.account_m.entity.Salesman;
-import com.example.account_m.entity.request.AddSalesmanRequest;
 import com.example.account_m.repository.SalesmanRepository;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@RequestMapping(value = "/salesman")
 public class SalesmanController {
 
-    private SalesmanRepository salesmanRepository;
 
     @Autowired
-    public SalesmanController(SalesmanRepository salesmanRepository) {
-        this.salesmanRepository = salesmanRepository;
-    }
+    SalesmanRepository salesmanRepository;
 
-    @RequestMapping(value = "salesman", method = RequestMethod.GET)
-    public List<Salesman> findAllSalesmans(){
+    @GetMapping(value="/all")
+    public List<Salesman> getAll(){
         return salesmanRepository.findAll();
     }
 
-    @RequestMapping(value = "salesman", method = RequestMethod.POST)
-    public void addSalesman(@RequestBody AddSalesmanRequest addSalesmanRequest){
-        Salesman salesman = new Salesman();
-        salesman.setName(addSalesmanRequest.getName());
-        salesman.setSurname(addSalesmanRequest.getSurname());
-        salesman.setJMBG(addSalesmanRequest.getJMBG());
-        salesman.setBirthDate(addSalesmanRequest.getBirthDate());
-        salesman.setPay(addSalesmanRequest.getPay());
-        salesman.setRentACarOffice(addSalesmanRequest.getRentACarOffice());
-        salesmanRepository.save(salesman);
+    @GetMapping("/get/{id}")
+    public Salesman getSalesmanById(@PathVariable(value = "id") Long id) throws NotFoundException {
+        return salesmanRepository.findById(id).orElseThrow(() -> new NotFoundException("Salesman with given id not found"));
+    }
+
+    @DeleteMapping("delete/{id}")
+    public ResponseEntity<?> deleteSalesman(@PathVariable(value = "id") Long id) throws NotFoundException {
+        Salesman salesman = salesmanRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Salesman with given id not found"));
+
+        salesmanRepository.delete(salesman);
+
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("update/{id}")
+    public Salesman updateSalesman(@PathVariable(value = "id") Long id,
+                                               @Valid @RequestBody Salesman salesmanUpdated) throws NotFoundException {
+
+        Salesman salesman = salesmanRepository
+                .findById(id)
+                .orElseThrow(
+                        () -> new NotFoundException("Salesman with given id not found")
+                );
+
+        salesman.setJMBG(salesmanUpdated.getJMBG());
+        salesman.setBirthDate(salesmanUpdated.getBirthDate());
+        salesman.setPay(salesmanUpdated.getPay());
+        salesman.setRentACarOffice(salesmanUpdated.getRentACarOffice());
+
+
+        salesmanUpdated = salesmanRepository.save(salesman);
+        return salesmanUpdated ;
+    }
+
+    @PostMapping(value="/insert")
+    public Salesman createSalesman(@Valid @RequestBody final Salesman salesman){
+        return salesmanRepository.save(salesman);
     }
 
 }

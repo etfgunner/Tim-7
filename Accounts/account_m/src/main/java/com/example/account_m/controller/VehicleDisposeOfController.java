@@ -2,39 +2,66 @@ package com.example.account_m.controller;
 
 
 import com.example.account_m.entity.VehicleDisposeOf;
-import com.example.account_m.entity.request.AddVehicleDisposeOfRequest;
 import com.example.account_m.repository.VehicleDisposeOfRepository;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@RequestMapping(value = "/vehicledisposeof")
 public class VehicleDisposeOfController {
 
-    private VehicleDisposeOfRepository vehicleDisposeOfRepository;
 
     @Autowired
-    public VehicleDisposeOfController(VehicleDisposeOfRepository vehicleDisposeOfRepository) {
-        this.vehicleDisposeOfRepository = vehicleDisposeOfRepository;
-    }
+    VehicleDisposeOfRepository vehicleDisposeOfRepository;
 
-    @RequestMapping(value = "vehicleDisposeOf", method = RequestMethod.GET)
-    public List<VehicleDisposeOf> findAllVehicleDisposeOfs(){
+    @GetMapping(value="/all")
+    public List<VehicleDisposeOf> getAll(){
         return vehicleDisposeOfRepository.findAll();
     }
 
-    @RequestMapping(value = "vehicleDisposeOf", method = RequestMethod.POST)
-    public void addVehicleDisposeOf(@RequestBody AddVehicleDisposeOfRequest addVehicleDisposeOfRequest){
-        VehicleDisposeOf vehicleDisposeOf = new VehicleDisposeOf();
-        vehicleDisposeOf.setVehicleID(addVehicleDisposeOfRequest.getVehicleID());
-        vehicleDisposeOf.setReason(addVehicleDisposeOfRequest.getReason());
-        vehicleDisposeOf.setRentACarOffice(addVehicleDisposeOfRequest.getRentACarOffice());
-        vehicleDisposeOf.setSalesman(addVehicleDisposeOfRequest.getSalesman());
-        vehicleDisposeOfRepository.save(vehicleDisposeOf);
+    @GetMapping("/get/{id}")
+    public VehicleDisposeOf getVehicleDisposeOfById(@PathVariable(value = "id") Long id) throws NotFoundException {
+        return vehicleDisposeOfRepository.findById(id).orElseThrow(() -> new NotFoundException("VehicleDisposeOf with given id not found"));
+    }
+
+    @DeleteMapping("delete/{id}")
+    public ResponseEntity<?> deleteVehicleDisposeOf(@PathVariable(value = "id") Long id) throws NotFoundException {
+        VehicleDisposeOf vehicleDisposeOf = vehicleDisposeOfRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("VehicleDisposeOf with given id not found"));
+
+        vehicleDisposeOfRepository.delete(vehicleDisposeOf);
+
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("update/{id}")
+    public VehicleDisposeOf updateVehicleDisposeOf(@PathVariable(value = "id") Long id,
+                                               @Valid @RequestBody VehicleDisposeOf vehicleDisposeOfUpdated) throws NotFoundException {
+
+        VehicleDisposeOf vehicleDisposeOf = vehicleDisposeOfRepository
+                .findById(id)
+                .orElseThrow(
+                        () -> new NotFoundException("VehicleDisposeOf with given id not found")
+                );
+
+        vehicleDisposeOf.setVehicleID(vehicleDisposeOfUpdated.getVehicleID());
+        vehicleDisposeOf.setReason(vehicleDisposeOfUpdated.getReason());
+        vehicleDisposeOf.setSalesman(vehicleDisposeOfUpdated.getSalesman());
+        vehicleDisposeOf.setRentACarOffice(vehicleDisposeOfUpdated.getRentACarOffice());
+
+
+        vehicleDisposeOfUpdated = vehicleDisposeOfRepository.save(vehicleDisposeOf);
+        return vehicleDisposeOfUpdated;
+    }
+
+    @PostMapping(value="/insert")
+    public VehicleDisposeOf createVehicleDisposeOf(@Valid @RequestBody final VehicleDisposeOf vehicleDisposeOf){
+        return vehicleDisposeOfRepository.save(vehicleDisposeOf);
     }
 
 }

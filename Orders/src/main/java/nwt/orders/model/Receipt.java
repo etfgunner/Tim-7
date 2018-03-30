@@ -2,7 +2,9 @@ package nwt.orders.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -10,7 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Positive;
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.lang.Nullable;
@@ -23,12 +27,12 @@ public class Receipt {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
-    @OneToOne
-    @JoinColumn(name = "id")
-    private Rental rental;
+    @NotNull
+    private Long rental;
     @Valid
     private Long transactionNumber;
     @Valid
+    @Positive
     private double price;
     @Valid
     private double discount;
@@ -80,11 +84,11 @@ public class Receipt {
         this.dateCreated = dateCreated;
     }
 
-	public Rental getRental() {
+	public Long getRental() {
 		return rental;
 	}
 
-	public void setRental(Rental rental) {
+	public void setRental(Long rental) {
 		this.rental = rental;
 	}
 }

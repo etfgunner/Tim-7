@@ -1,6 +1,8 @@
 package nwt.orders.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -8,7 +10,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import org.springframework.lang.Nullable;
 
@@ -20,13 +24,13 @@ public class Returns {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @OneToOne
-    @JoinColumn(name = "id")
-    private Rental rental;
+    @NotNull
+    private Long rental;
     @Valid
     private Date dateReturn;
     @Valid
     @NotBlank
+    @Size(min=1, max=300)
     private String reason;
 
     public Long getId() {
@@ -42,11 +46,11 @@ public class Returns {
         this.id = id;
     }
 
-    public Rental getRental() {
+    public Long getRental() {
 		return rental;
 	}
 
-	public void setRental(Rental rental) {
+	public void setRental(Long rental) {
 		this.rental = rental;
 	}
 

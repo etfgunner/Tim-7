@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javassist.NotFoundException;
-import nwt.orders.DateValidator;
 import nwt.orders.model.Receipt;
 import nwt.orders.repository.ReceiptsRepository;
+import nwt.orders.service.ReceiptsService;
 
 @RestController
 @RequestMapping(value="/rest/receipts")
@@ -26,6 +26,9 @@ public class ReceiptsResource {
 	
 	@Autowired
 	ReceiptsRepository receiptsRepository;
+	
+	@Autowired
+	ReceiptsService receiptsService;
 	
 	@GetMapping(value="/all")
 	public List<Receipt> getAll(){
@@ -41,21 +44,8 @@ public class ReceiptsResource {
 	public Receipt updateReceipt(@PathVariable(value = "id") Long receiptId,
 	                                        @Valid @RequestBody Receipt receiptUpdated) throws NotFoundException {
 
-	    Receipt receipt = receiptsRepository
-	    		.findById(receiptId)
-	    		.orElseThrow(
-	    				() -> new NotFoundException("Receipt with given id not found")
-	    				);
-	    DateValidator.validateDate(receiptUpdated.getDateCreated());
-	    receipt.setDateCreated(receiptUpdated.getDateCreated());
-	    receipt.setDiscount(receiptUpdated.getDiscount());
-	    receipt.setPrice(receiptUpdated.getPrice());
-	    receipt.setRental(receiptUpdated.getRental());
-	    receipt.setTransactionNumber(receiptUpdated.getTransactionNumber());
-	    
-
-	    Receipt updatedReceipt = receiptsRepository.save(receipt);
-	    return updatedReceipt;
+	   
+	    return receiptsService.updateReceipt(receiptId, receiptUpdated);
 	}
 	
 	@DeleteMapping("delete/{id}")
@@ -69,8 +59,7 @@ public class ReceiptsResource {
 	}
 	@PostMapping(value="/insert")
 	public Receipt createReceipt(@Valid @RequestBody final Receipt receipt){
-	DateValidator.validateDate(receipt.getDateCreated());
-	 return receiptsRepository.save(receipt);
+		return receiptsService.createReceipt(receipt);
 		//return receiptsRepository.findAll();		
 	}
 	@GetMapping(value="/price/{price}")

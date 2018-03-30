@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javassist.NotFoundException;
-import nwt.orders.DateValidator;
 import nwt.orders.model.Rental;
 import nwt.orders.repository.RentalsRepository;
+import nwt.orders.service.RentalsService;
 
 @RestController
 @RequestMapping(value="/rest/rentals")
@@ -28,6 +28,9 @@ public class RentalsResource {
 
 	@Autowired 
 	RentalsRepository rentalsRepository;
+	
+	@Autowired
+	RentalsService rentalsService;
 	
 	@GetMapping(value="/all")
 	public List<Rental> getAll(){
@@ -41,21 +44,7 @@ public class RentalsResource {
 	public Rental updateRental(@PathVariable(value = "id") Long rentalId,
 	                                        @Valid @RequestBody Rental rentalUpdated) throws NotFoundException {
 
-	    Rental rental = rentalsRepository
-	    		.findById(rentalId)
-	    		.orElseThrow(
-	    				() -> new NotFoundException("Rental with given id not found")
-	    				);
-	    DateValidator.validateDate(rentalUpdated.getDateRented());
-	    DateValidator.compareDates(rentalUpdated.getDateFrom(), rentalUpdated.getDateTo());
-	    rental.setClientId(rentalUpdated.getClientId());
-	    rental.setDateFrom(rentalUpdated.getDateFrom());
-	    rental.setDateRented(rentalUpdated.getDateRented());
-	    rental.setDateTo(rentalUpdated.getDateTo());
-	    rental.setVehicleId(rentalUpdated.getVehicleId());
-
-	    Rental updatedRental = rentalsRepository.save(rental);
-	    return updatedRental;
+	   return rentalsService.updateRental(rentalId, rentalUpdated);
 	}
 	
 	@DeleteMapping("delete/{id}")
@@ -69,9 +58,7 @@ public class RentalsResource {
 	}
 	@PostMapping(value="/insert")
 	public Rental createRental(@Valid @RequestBody final Rental rental){
-	 DateValidator.validateDate(rental.getDateRented());
-	 DateValidator.compareDates(rental.getDateFrom(), rental.getDateTo());
-	 return rentalsRepository.save(rental);
+	return rentalsService.createRental(rental);
 		//return rentalsRepository.findAll();		
 	}
 	@GetMapping("/before/{date}")

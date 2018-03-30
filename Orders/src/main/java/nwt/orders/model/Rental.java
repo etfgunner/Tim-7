@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.springframework.lang.Nullable;
@@ -18,9 +19,9 @@ public class Rental {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
-    @Valid
+    @NotNull
     private Long vehicleId;
-    @Valid
+    @NotNull
     private Long clientId;
     @Valid
     private Date dateRented;

@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javassist.NotFoundException;
-import nwt.orders.DateValidator;
 import nwt.orders.model.Rental;
 import nwt.orders.model.Returns;
 import nwt.orders.model.Returns;
 import nwt.orders.repository.ReturnsRepository;
+import nwt.orders.service.ReturnsService;
 
 @RestController
 @RequestMapping(value="/rest/returns")
@@ -29,6 +29,9 @@ public class ReturnsResource {
 
 	@Autowired
 	ReturnsRepository returnsRepository;
+	
+	@Autowired
+	ReturnsService returnsService;
 	
 	@GetMapping(value="/all")
 	public List<Returns> getAll(){
@@ -42,18 +45,7 @@ public class ReturnsResource {
 	public Returns updateReturns(@PathVariable(value = "id") Long returnsId,
 	                                        @Valid @RequestBody Returns returnsUpdated) throws NotFoundException {
 
-	    Returns returns = returnsRepository
-	    		.findById(returnsId)
-	    		.orElseThrow(
-	    				() -> new NotFoundException("Returns with given id not found")
-	    				);
-	    DateValidator.validateDate(returnsUpdated.getDateReturn());
-	    returns.setDateReturn(returnsUpdated.getDateReturn());
-	    returns.setReason(returnsUpdated.getReason());
-	    returns.setRental(returnsUpdated.getRental());
-
-	    Returns updatedReturns = returnsRepository.save(returns);
-	    return updatedReturns;
+	    return returnsService.updateReturn(returnsId, returnsUpdated);
 	}
 	
 	@DeleteMapping("delete/{id}")
@@ -67,8 +59,7 @@ public class ReturnsResource {
 	}
 	@PostMapping(value="/insert")
 	public Returns createReturns(@Valid @RequestBody final Returns returns){
-		DateValidator.validateDate(returns.getDateReturn());
-	 return returnsRepository.save(returns);
+		return returnsService.createReturn(returns);
 		//return returnsRepository.findAll();		
 	}
 	@GetMapping("/after/{date}")

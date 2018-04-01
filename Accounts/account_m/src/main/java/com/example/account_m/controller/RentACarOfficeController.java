@@ -6,6 +6,7 @@ import com.example.account_m.repository.RentACarOfficeRepository;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -42,7 +43,11 @@ public class RentACarOfficeController {
 
     @PutMapping("update/{id}")
     public RentACarOffice updateRentACarOffice(@PathVariable(value = "id") Long id,
-                                 @Valid @RequestBody RentACarOffice rentACarOfficeUpdated) throws NotFoundException {
+                                 @RequestBody @Valid RentACarOffice rentACarOfficeUpdated, Errors errors) throws NotFoundException, Exception {
+
+        if(errors.hasErrors()){
+            throw new Exception(errors.getAllErrors().get(0).getDefaultMessage());
+        }
 
         RentACarOffice rentACarOffice = rentACarOfficeRepository
                 .findById(id)
@@ -60,7 +65,12 @@ public class RentACarOfficeController {
     }
 
     @PostMapping(value="/insert")
-    public RentACarOffice createRentACarOffice(@Valid @RequestBody final RentACarOffice client){
+    public RentACarOffice createRentACarOffice(@RequestBody @Valid final RentACarOffice client, Errors errors) throws Exception{
+
+        if(errors.hasErrors()){
+            throw new Exception(errors.getAllErrors().get(0).getDefaultMessage());
+        }
+
         return rentACarOfficeRepository.save(client);
     }
 

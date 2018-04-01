@@ -6,6 +6,7 @@ import com.example.account_m.repository.VehicleDisposeOfRepository;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -41,7 +42,11 @@ public class VehicleDisposeOfController {
 
     @PutMapping("update/{id}")
     public VehicleDisposeOf updateVehicleDisposeOf(@PathVariable(value = "id") Long id,
-                                               @Valid @RequestBody VehicleDisposeOf vehicleDisposeOfUpdated) throws NotFoundException {
+                                               @RequestBody @Valid VehicleDisposeOf vehicleDisposeOfUpdated, Errors errors) throws NotFoundException, Exception {
+
+        if(errors.hasErrors()){
+            throw new Exception(errors.getAllErrors().get(0).getDefaultMessage());
+        }
 
         VehicleDisposeOf vehicleDisposeOf = vehicleDisposeOfRepository
                 .findById(id)
@@ -60,7 +65,12 @@ public class VehicleDisposeOfController {
     }
 
     @PostMapping(value="/insert")
-    public VehicleDisposeOf createVehicleDisposeOf(@Valid @RequestBody final VehicleDisposeOf vehicleDisposeOf){
+    public VehicleDisposeOf createVehicleDisposeOf(@RequestBody @Valid final VehicleDisposeOf vehicleDisposeOf, Errors errors) throws Exception{
+
+        if(errors.hasErrors()){
+            throw new Exception(errors.getAllErrors().get(0).getDefaultMessage());
+        }
+
         return vehicleDisposeOfRepository.save(vehicleDisposeOf);
     }
 

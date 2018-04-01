@@ -3,18 +3,25 @@ package com.example.account_m.entity;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class RentACarOffice {
 
     @Id
     @GeneratedValue
+    @NotNull(message = "The id must not be null!")
     private long id;
 
+    @Size(min = 3, max = 50, message = "The length of the office name must be between 3 and 50 characters!")
     private String officeName;
 
+    @Min(value = 0L, message = "The cars number must be positive!")
     private int carsNumber;
 
+    @NotNull(message = "The location id must not be null!")
     private int locationID;
 
 

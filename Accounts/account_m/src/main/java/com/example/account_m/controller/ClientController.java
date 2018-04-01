@@ -6,6 +6,8 @@ import com.example.account_m.repository.ClientRepository;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -41,7 +43,11 @@ public class ClientController {
 
     @PutMapping("update/{id}")
     public Client updateClient(@PathVariable(value = "id") Long id,
-                                               @Valid @RequestBody Client clientUpdated) throws NotFoundException {
+                                               @RequestBody @Valid Client clientUpdated, Errors errors) throws NotFoundException, Exception {
+
+        if(errors.hasErrors()){
+            throw new Exception(errors.getAllErrors().get(0).getDefaultMessage());
+        }
 
         Client client = clientRepository
                 .findById(id)
@@ -58,7 +64,12 @@ public class ClientController {
     }
 
     @PostMapping(value="/insert")
-    public Client createClient(@Valid @RequestBody final Client client){
+    public Client createClient(@RequestBody @Valid final Client client, Errors errors) throws Exception {
+
+        if(errors.hasErrors()){
+            throw new Exception(errors.getAllErrors().get(0).getDefaultMessage());
+        }
+
         return clientRepository.save(client);
     }
 

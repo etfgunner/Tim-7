@@ -1,16 +1,21 @@
 package com.example.account_m.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class VehicleDisposeOf {
 
     @Id
     @GeneratedValue
+    @NotNull(message = "The id must not be null!")
     private long id;
 
+    @NotNull(message = "The vehicle id must not be null!")
     private int vehicleID;
 
+    @Size(max = 255, message = "The length of the reason must be less than 255 characters!")
     private String reason;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE})

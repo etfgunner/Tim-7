@@ -5,6 +5,7 @@ import com.example.account_m.repository.SalesmanRepository;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -40,7 +41,11 @@ public class SalesmanController {
 
     @PutMapping("update/{id}")
     public Salesman updateSalesman(@PathVariable(value = "id") Long id,
-                                               @Valid @RequestBody Salesman salesmanUpdated) throws NotFoundException {
+                                               @RequestBody @Valid Salesman salesmanUpdated, Errors errors) throws NotFoundException, Exception {
+
+        if(errors.hasErrors()){
+            throw new Exception(errors.getAllErrors().get(0).getDefaultMessage());
+        }
 
         Salesman salesman = salesmanRepository
                 .findById(id)
@@ -59,7 +64,12 @@ public class SalesmanController {
     }
 
     @PostMapping(value="/insert")
-    public Salesman createSalesman(@Valid @RequestBody final Salesman salesman){
+    public Salesman createSalesman(@RequestBody @Valid final Salesman salesman, Errors errors) throws Exception{
+
+        if(errors.hasErrors()){
+            throw new Exception(errors.getAllErrors().get(0).getDefaultMessage());
+        }
+
         return salesmanRepository.save(salesman);
     }
 

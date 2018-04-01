@@ -1,15 +1,21 @@
 package com.example.account_m.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
 import java.util.Date;
 
 @Entity
 public class Salesman extends Person{
 
+    @Pattern(regexp="\\d{13}")
     private int JMBG;
 
+    @Past
     private Date birthDate;
 
+    @DecimalMin(value = "0", message = "The cars number must be positive!")
     private double pay;
 
 

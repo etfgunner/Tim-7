@@ -2,6 +2,9 @@ package com.example.vehicle.model;
 
 import javax.persistence.*;
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Vehicle {
@@ -9,21 +12,28 @@ public class Vehicle {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name="id")
+    @NotNull(message = "The id must not be null!")
     private Integer id;
     @Valid
+    @Size(min = 3, max = 20, message = "The length of the brand must be between 3 and 20 characters!")
     private String brand;
     @Valid
+    @Size(min = 3, max = 20, message = "The length of the name must be between 3 and 20 characters!")
     private String name;
     @Valid
+    @Size(min = 3, max = 20, message = "The length of the name must be between 3 and 20 characters!")
     private String type;
     @Valid
+    @Min(value = 0L, message = "Year must be positive!")
     private Integer producedYear;
     @Valid
+    @Size(min = 6, max = 9, message = "The length of the name must be between 6 and 9 characters! (Manual or Automatic")
     private String transmission;
     @Valid
     private String color;
     @OneToOne
     @JoinColumn(name = "id")
+    @NotNull(message = "The id must not be null!")
     private Location locationID;
     @Valid
     private boolean available;

@@ -2,6 +2,7 @@ package com.example.vehicle.model;
 
 import javax.persistence.*;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Location {
@@ -9,6 +10,7 @@ public class Location {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name="id")
+    @NotNull(message = "The id must not be null!")
     private Integer id;
     @Valid
     private String name;

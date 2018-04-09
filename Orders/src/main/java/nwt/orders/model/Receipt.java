@@ -27,16 +27,12 @@ public class Receipt {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
-    @NotNull
-    private Long rental;
-    @Valid
+    @OneToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+    private Rental rental;
     private Long transactionNumber;
-    @Valid
     @Positive
     private double price;
-    @Valid
     private double discount;
-    @Valid
     private Date dateCreated;
 
     public Receipt(){
@@ -84,11 +80,11 @@ public class Receipt {
         this.dateCreated = dateCreated;
     }
 
-	public Long getRental() {
+	public Rental getRental() {
 		return rental;
 	}
 
-	public void setRental(Long rental) {
+	public void setRental(Rental rental) {
 		this.rental = rental;
 	}
 }

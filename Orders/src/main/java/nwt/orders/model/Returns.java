@@ -24,9 +24,8 @@ public class Returns {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @NotNull
-    private Long rental;
-    @Valid
+    @OneToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+    private Rental rental;
     private Date dateReturn;
     @Valid
     @NotBlank
@@ -46,11 +45,11 @@ public class Returns {
         this.id = id;
     }
 
-    public Long getRental() {
+    public Rental getRental() {
 		return rental;
 	}
 
-	public void setRental(Long rental) {
+	public void setRental(Rental rental) {
 		this.rental = rental;
 	}
 

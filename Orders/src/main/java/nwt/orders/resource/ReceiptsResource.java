@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javassist.NotFoundException;
+import nwt.orders.OrdersApplication;
 import nwt.orders.model.Receipt;
 import nwt.orders.repository.ReceiptsRepository;
 import nwt.orders.service.ReceiptsService;
@@ -30,6 +32,9 @@ public class ReceiptsResource {
 	@Autowired
 	ReceiptsService receiptsService;
 	
+	@Autowired
+	RabbitTemplate rabbitTemplate;
+	
 	@GetMapping(value="/all")
 	public List<Receipt> getAll(){
 		return receiptsRepository.findAll();
@@ -39,6 +44,14 @@ public class ReceiptsResource {
 	public Receipt getReceiptById(@PathVariable(value = "id") Long receiptId) throws NotFoundException {
 	    return receiptsRepository.findById(receiptId).orElseThrow(() -> new NotFoundException("Receipt with given id not found"));
 	}
+	
+//	@GetMapping("/get/{id}")
+//	public String getReceiptById(@PathVariable(value = "id") Long receiptId) throws NotFoundException {
+//		System.out.println("Sending message...");
+//        rabbitTemplate.convertAndSend(OrdersApplication.topicExchangeName, "nwt.vehicles", receiptId.toString());
+//        return "Rabbit!";
+//	}
+	
 	
 	@PutMapping("update/{id}")
 	public Receipt updateReceipt(@PathVariable(value = "id") Long receiptId,

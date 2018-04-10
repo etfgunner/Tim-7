@@ -6,6 +6,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.omg.CosNaming.NamingContextPackage.NotFoundHelper;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javassist.NotFoundException;
+import nwt.orders.OrdersApplication;
 import nwt.orders.model.Rental;
 import nwt.orders.repository.RentalsRepository;
 import nwt.orders.service.RentalsService;
@@ -34,6 +36,10 @@ public class RentalsResource {
 	
 	@Autowired
 	OrdersClient ordersClient;
+	
+	@Autowired
+	RabbitTemplate rabbitTemplate;
+	
 	@GetMapping(value="/all")
 	public List<Rental> getAll(){
 		return rentalsRepository.findAll();
@@ -91,6 +97,10 @@ public class RentalsResource {
 			System.out.println(ex.getMessage());
 			
 		}
+		//asinhrona komunikacija sa mikroservisom vehicles
+		rabbitTemplate.convertAndSend(OrdersApplication.topicExchangeName, "nwt.vehicles.reserve", rental.getVehicleId());
+		
+		
 	return rentalsService.createRental(rental);
 		//return rentalsRepository.findAll();		
 	}

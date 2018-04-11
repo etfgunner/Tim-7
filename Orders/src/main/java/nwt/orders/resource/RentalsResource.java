@@ -51,22 +51,7 @@ public class RentalsResource {
 	@PutMapping("update/{id}")
 	public Rental updateRental(@PathVariable(value = "id") Long rentalId,
 	                                        @Valid @RequestBody Rental rentalUpdated) throws NotFoundException {
-		try	{
-			String status=ordersClient.doesClientExist(rentalUpdated.getClientId());
-			if(status!="OK") throw new NotFoundException("Client with given id does not exist!");
-		}
-		catch(Exception ex) {
-			System.out.println(ex.getMessage());
-			
-		}
-		try	{
-			String status=ordersClient.doesClientExist(rentalUpdated.getClientId());
-			if(status!="OK") throw new NotFoundException("Vehicle with given id does not exist");
-		}
-		catch(Exception ex) {
-			System.out.println(ex.getMessage());
-			
-		}
+		
 	   return rentalsService.updateRental(rentalId, rentalUpdated);
 	}
 	
@@ -81,27 +66,8 @@ public class RentalsResource {
 	}
 	@PostMapping(value="/insert")
 	public Rental createRental(@Valid @RequestBody final Rental rental){
-		try	{
-			String status=ordersClient.doesClientExist(rental.getClientId());
-			if(status!="OK") throw new NotFoundException("Client with given id does not exist!");
-		}
-		catch(Exception ex) {
-			System.out.println(ex.getMessage());
-			
-		}
-		try	{
-			String status=ordersClient.doesClientExist(rental.getClientId());
-			if(status!="OK") throw new NotFoundException("Vehicle with given id does not exist");
-		}
-		catch(Exception ex) {
-			System.out.println(ex.getMessage());
-			
-		}
-		//asinhrona komunikacija sa mikroservisom vehicles
-		rabbitTemplate.convertAndSend(OrdersApplication.topicExchangeName, "nwt.vehicles.reserve", rental.getVehicleId());
 		
-		
-	return rentalsService.createRental(rental);
+		return rentalsService.createRental(rental);
 		//return rentalsRepository.findAll();		
 	}
 	@GetMapping("/before/{date}")

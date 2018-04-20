@@ -8,7 +8,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import java.util.Arrays;
 
 
-//@EnableDiscoveryClient
+@EnableDiscoveryClient
 @SpringBootApplication
 public class Runner 
 {

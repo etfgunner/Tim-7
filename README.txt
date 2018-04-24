@@ -32,6 +32,10 @@ Orders
 Dostupan na:
 http://185.91.158.33:8081/
 
+Vehicles
+Dostupan na:
+http://185.91.158.33:8082/
+
 Eureka:
 http://185.91.158.33:8761/
 

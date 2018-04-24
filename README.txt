@@ -24,7 +24,7 @@ Github account clana 3:		https://github.com/begicf
 
 Sistem se sastoji od tri servisa:
 
-Microservice Accounts
+Accounts
 Dostupan na:
 http://185.91.158.33:8080/
 

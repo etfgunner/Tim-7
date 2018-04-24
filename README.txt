@@ -20,7 +20,7 @@ Github account clana 2:		https://github.com/spalalic
 	
 Ime i prezime clana 3:		Begic Fuad
 Index clana 3 (ABCD/EFGHI):	1357/2017
-Github account clana 3:		https://github.com/beg
+Github account clana 3:		https://github.com/begicf
 
 Sistem se sastoji od tri servisa:
 

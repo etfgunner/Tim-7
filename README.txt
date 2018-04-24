@@ -24,9 +24,15 @@ Github account clana 3:		https://github.com/beg
 
 Sistem se sastoji od tri servisa:
 
-Accounts
+Microservice Accounts
 Dostupan na:
-http://185.91.158.46:8080/
-Orders
+http://185.91.158.33:8080/
 
-Vehicles
+Orders
+Dostupan na:
+http://185.91.158.33:8081/
+
+Eureka:
+http://185.91.158.33:8761/
+
+

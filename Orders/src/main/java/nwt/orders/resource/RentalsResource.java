@@ -44,6 +44,13 @@ public class RentalsResource {
 	public List<Rental> getAll(){
 		return rentalsRepository.findAll();
 	}
+	@GetMapping(value="/testAsync")
+	public String getResponse(){
+		rabbitTemplate.convertAndSend(OrdersApplication.topicExchangeName, "nwt.vehicles.reserve", 5);
+		return "OK";
+
+	}
+
 	@GetMapping("/get/{id}")
 	public Rental getRentalById(@PathVariable(value = "id") Long rentalId) throws NotFoundException {
 	    return rentalsRepository.findById(rentalId).orElseThrow(() -> new NotFoundException("Rental with given id not found"));

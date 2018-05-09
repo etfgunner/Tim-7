@@ -20,13 +20,24 @@ Github account clana 2:		https://github.com/spalalic
 	
 Ime i prezime clana 3:		Begic Fuad
 Index clana 3 (ABCD/EFGHI):	1357/2017
-Github account clana 3:		https://github.com/beg
+Github account clana 3:		https://github.com/begicf
 
 Sistem se sastoji od tri servisa:
 
 Accounts
 Dostupan na:
-http://185.91.158.46:8080/
+http://185.91.158.33:8080/
+
 Orders
+Dostupan na:
+http://185.91.158.33:8081/
 
 Vehicles
+Dostupan na:
+http://185.91.158.33:8082/
+
+Eureka:
+http://185.91.158.33:8761/
+
+RabbitMQ
+http://185.91.158.33:15672/

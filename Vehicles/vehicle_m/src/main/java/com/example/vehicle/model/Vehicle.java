@@ -33,7 +33,7 @@ public class Vehicle {
     private String color;
     @OneToOne
     @JoinColumn(name = "id")
-    @NotNull(message = "The id must not be null!")
+ //   @NotNull(message = "The id must not be null!")
     private Location locationID;
     @Valid
     private boolean available;

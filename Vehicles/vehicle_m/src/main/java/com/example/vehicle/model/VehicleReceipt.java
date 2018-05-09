@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -19,10 +20,10 @@ public class VehicleReceipt {
     @NotNull(message = "The id must not be null!")
     private Vehicle vehicleID;
     @Valid
-    @DecimalMin(value = "0", message = "Price can't be negative!")
+    @Positive
     private float costPerDay;
     @Valid
-    @DecimalMin(value = "0", message = "Deposit can't be negative!")
+    @Positive
     private float deposit;
 
     public VehicleReceipt() {

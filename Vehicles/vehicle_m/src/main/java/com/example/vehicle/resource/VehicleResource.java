@@ -17,6 +17,9 @@ public class VehicleResource {
     @Autowired
     VehicleRepository vehicleRepository;
 
+    @Autowired
+    VehicleService vehicleService;
+
     @GetMapping(value = "/all")
     public List<Vehicle> getAll() {
         return vehicleRepository.findAll();

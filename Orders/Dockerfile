@@ -1,4 +1,4 @@
-FROM java:8
-EXPOSE 8080
-ADD /target/orders.jar orders.jar
-ENTRYPOINT ["java","-jar","orders.jar"]
+FROM openjdk:8
+ADD /target/spring-boot-orders.jar spring-boot-orders.jar
+EXPOSE 8081
+ENTRYPOINT ["java", "-jar", "spring-boot-orders.jar"]

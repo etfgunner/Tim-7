@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Subscriber
 {
-    @RabbitListener(queues="${jsa.rabbitmq.queue}")
+   // @RabbitListener(queues="${jsa.rabbitmq.queue}")
     public void recievedMessage(String msg)
     {
         System.out.println("Recieved Message: " + msg);

@@ -3,18 +3,47 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  constructor(){
+    super();
+    this.state={
+      rentals:[],
+    };
+
+  }
+
+  componentDidMount(){
+    fetch('http://bst119.bstelecom.ba:8081/rest/rentals/all')
+    .then(
+      results => {
+      console.log('fdsafdsa');
+      var jes=results.json();
+      console.log(jes);
+      return jes;
+    }
+  ).then(data => {
+      let rentals=data.results.map((rent) => {
+        return (
+          <div key={rent.results}>
+          <b>{rent.id}</b>
+          </div>
+        )
+      })
+      this.setState({rentals: rentals});
+      console.log("state",this.state.rentals)
+    })
+  }
+  
+
+  
+  
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div className="container2">
+      <div className="container1">
+      {this.state.rentals}
       </div>
-    );
+      </div>
+    )
   }
 }
 

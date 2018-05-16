@@ -1,5 +1,6 @@
 package com.example.vehicle.resource;
 
+import com.example.vehicle.Service.VehicleService;
 import com.example.vehicle.model.Vehicle;
 import com.example.vehicle.repository.VehicleRepository;
 import javassist.NotFoundException;

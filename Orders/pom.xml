@@ -5,7 +5,7 @@
 
 	<groupId>nwt</groupId>
 	<artifactId>orders</artifactId>
-	<version>1</version>
+	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>orders</name>
@@ -14,7 +14,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.0.0.RELEASE</version>
+		<version>2.0.0.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
@@ -75,9 +75,6 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-				<finalName>spring-boot-orders</finalName>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>

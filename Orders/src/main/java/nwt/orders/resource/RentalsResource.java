@@ -9,6 +9,7 @@ import org.omg.CosNaming.NamingContextPackage.NotFoundHelper;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +27,7 @@ import nwt.orders.service.RentalsService;
 
 @RestController
 @RequestMapping(value="/rest/rentals")
+@CrossOrigin(origins = "http://localhost:3000")
 public class RentalsResource {
 
 	@Autowired 
@@ -55,6 +57,7 @@ public class RentalsResource {
 	public Rental getRentalById(@PathVariable(value = "id") Long rentalId) throws NotFoundException {
 	    return rentalsRepository.findById(rentalId).orElseThrow(() -> new NotFoundException("Rental with given id not found"));
 	}
+	
 	@PutMapping("update/{id}")
 	public Rental updateRental(@PathVariable(value = "id") Long rentalId,
 	                                        @Valid @RequestBody Rental rentalUpdated) throws NotFoundException {
@@ -71,18 +74,21 @@ public class RentalsResource {
 
 	    return ResponseEntity.ok().build();
 	}
+	
 	@PostMapping(value="/insert")
 	public Rental createRental(@Valid @RequestBody final Rental rental){
 		
 		return rentalsService.createRental(rental);
 		//return rentalsRepository.findAll();		
 	}
+	
 	@GetMapping("/before/{date}")
 	public List<Rental> getRentalsBefore(@PathVariable(value = "date") String date) {
 		@SuppressWarnings("deprecation")
 		Date date1=new Date(date.replace('-','/'));
 	    return rentalsRepository.findByDateRentedBefore(date1);
 	}
+	
 	@GetMapping("/after/{date}")
 	public List<Rental> getRentalsAfter(@PathVariable(value = "date") String date) {
 		@SuppressWarnings("deprecation")

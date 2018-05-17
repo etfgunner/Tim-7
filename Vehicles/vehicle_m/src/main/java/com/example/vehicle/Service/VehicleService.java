@@ -8,6 +8,6 @@ public class VehicleService {
     @Autowired
     VehicleRepository vehicleRepository;
 
-
-
+    @Autowired
+    RabbitTemplate rabbitTemplate;
 }

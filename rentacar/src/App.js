@@ -12,24 +12,28 @@ class App extends Component {
   }
 
   componentDidMount(){
-    fetch('http://bst119.bstelecom.ba:8081/rest/rentals/all')
+    fetch('http://185.91.158.33:8081/rest/rentals/all')
     .then(
       results => {
       console.log('fdsafdsa');
-      var jes=results.json();
-      console.log(jes);
-      return jes;
+      console.log(results);
+      return results.json();
     }
   ).then(data => {
+    //console.log(data['0']);
+    data=data['0'];
+    console.log(data);
       let rentals=data.results.map((rent) => {
         return (
           <div key={rent.results}>
+          <b>fads</b>
           <b>{rent.id}</b>
           </div>
         )
       })
       this.setState({rentals: rentals});
       console.log("state",this.state.rentals)
+      return data;
     })
   }
   

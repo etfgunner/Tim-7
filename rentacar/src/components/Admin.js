@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { Table} from 'antd';
 import 'antd/dist/antd.css';
 import VehicleForm from './VehicleForm';
+import VehicleViewForm from './VehicleViewForm';
 
 export default class Admin extends Component{
 
@@ -22,6 +23,11 @@ export default class Admin extends Component{
             	{JSON.stringify(this.state.fields, null, 2)}
             </p>
             </div>
+
+            /*<div>
+            	<VehicleViewForm />
+            </div>*/
+
         )
     }
 }

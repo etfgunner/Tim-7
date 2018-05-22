@@ -18,7 +18,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 /**
  * Authenticate requests with header 'Authorization: Bearer jwt-token'.
  *
- * @author shuaicj 2017/10/18
+ * 
  */
 public class JwtTokenAuthenticationFilter extends OncePerRequestFilter {
 

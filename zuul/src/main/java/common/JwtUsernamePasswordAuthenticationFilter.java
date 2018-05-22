@@ -26,7 +26,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
  * Authenticate the request to url /auth by POST with json body '{ username, password }'.
  * If successful, response the client with header 'Authorization: Bearer jwt-token'.
  *
- * @author shuaicj 2017/10/18
+ * 
  */
 public class JwtUsernamePasswordAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 

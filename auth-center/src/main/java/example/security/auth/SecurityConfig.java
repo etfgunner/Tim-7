@@ -1,4 +1,4 @@
-package shuaicj.example.security.auth;
+package example.security.auth;
 
 import javax.servlet.http.HttpServletResponse;
 

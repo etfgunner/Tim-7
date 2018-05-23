@@ -21,27 +21,10 @@ zuul:
       sensitiveHeaders: Cookie,Set-Cookie
       stripPrefix: false
    accounts:
-
       serviceId: account-ms
    orders:
       path: /orders/**
       serviceId: Orders
-
-hystrix:
-  threadpool:
-    default:
-      coreSize: 1000
-      maximumSize: 10000
-      queueSizeRejectionThreshold: -1
-      maxQueueSize: -1
-  command:
-    default:
-      execution:
-        isolation:
-          strategy: THREAD
-          thread:
-              timeoutInMilliseconds: 41000
-              
-      
+  
 security.jwt.secret: otherpeopledontknowit
       

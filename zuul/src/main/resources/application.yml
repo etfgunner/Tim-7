@@ -20,7 +20,7 @@ zuul:
       sensitiveHeaders: Cookie,Set-Cookie
       stripPrefix: false
    accounts:
-      path: /account/**
+
       serviceId: account-ms
    orders:
       path: /orders/**

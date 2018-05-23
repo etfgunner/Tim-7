@@ -3,7 +3,7 @@ package common;
 import lombok.Getter;
 import lombok.ToString;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpMethod;
+
 
 /**
  * Config JWT.
@@ -28,7 +28,27 @@ public class JwtAuthenticationConfig {
     private String secret;
 
 	public String getUrl() {
-		// TODO Auto-generated method stub
+		
 		return url;
+	}
+
+	public String getHeader() {
+
+		return header;
+	}
+
+	public String getPrefix() {
+
+		return prefix;
+	}
+
+	public String getSecret() {
+
+		return secret;
+	}
+
+	public long getExpiration() {
+		
+		return expiration;
 	}
 }

@@ -32,11 +32,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
                 .withUser("admin").password("admin").roles("ADMIN", "USER").and()
-                .withUser("shuaicj").password("shuaicj").roles("USER");
+                .withUser("test").password("test").roles("USER");
     }
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
+    	System.out.println("fasdf");
         httpSecurity
                 .csrf().disable()
                 .logout().disable()

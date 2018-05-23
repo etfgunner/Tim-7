@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.ToString;
 import org.springframework.beans.factory.annotation.Value;
 
+
 /**
  * Config JWT.
  */
@@ -25,4 +26,29 @@ public class JwtAuthenticationConfig {
 
     @Value("${security.jwt.secret}")
     private String secret;
+
+	public String getUrl() {
+		
+		return url;
+	}
+
+	public String getHeader() {
+
+		return header;
+	}
+
+	public String getPrefix() {
+
+		return prefix;
+	}
+
+	public String getSecret() {
+
+		return secret;
+	}
+
+	public long getExpiration() {
+		
+		return expiration;
+	}
 }

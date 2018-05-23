@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 @ToString
 public class JwtAuthenticationConfig {
 
-    @Value("${security.jwt.url:/account/client/all/}")
+    @Value("${security.jwt.url:/login}")
     private String url;
 
     @Value("${security.jwt.header:Authorization}")
@@ -51,4 +51,6 @@ public class JwtAuthenticationConfig {
 		
 		return expiration;
 	}
+
+
 }

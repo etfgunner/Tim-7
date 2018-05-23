@@ -28,7 +28,7 @@ zuul:
       serviceId: Orders
    vehicle:
       path: /vehicl/**
-      serviceId: Vehicle
+      serviceId: Vehicles
   
 security.jwt.secret: otherpeopledontknowit
       

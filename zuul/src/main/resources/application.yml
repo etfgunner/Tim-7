@@ -21,8 +21,10 @@ zuul:
       sensitiveHeaders: Cookie,Set-Cookie
       stripPrefix: false
    accounts:
+      path: /account/**
       serviceId: account-ms
    orders:
+      path: /order/**
       serviceId: Orders
   
 security.jwt.secret: otherpeopledontknowit

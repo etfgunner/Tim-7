@@ -1,47 +1,35 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
+import Home from './components/Home';
+import About from './components/About';
+import Orders from './components/Orders';
+import Contact from './components/Contact';
+import Navbar from './components/CustomNavbar';
+import Admin from './components/Admin';
+import LoginForm from './components/LoginForm';
+import Register from './components/Register';
 
 class App extends Component {
-  constructor(){
-    super();
-    this.state={
-      rentals:[],
-    };
 
-  }
-
-  componentDidMount(){
-    fetch('http://bst119.bstelecom.ba:8081/rest/rentals/all')
-    .then(
-      results => {
-      console.log('fdsafdsa');
-      var jes=results.json();
-      console.log(jes);
-      return jes;
-    }
-  ).then(data => {
-      let rentals=data.results.map((rent) => {
-        return (
-          <div key={rent.results}>
-          <b>{rent.id}</b>
-          </div>
-        )
-      })
-      this.setState({rentals: rentals});
-      console.log("state",this.state.rentals)
-    })
-  }
-  
 
   
   
   render() {
     return (
-      <div className="container2">
-      <div className="container1">
-      {this.state.rentals}
-      </div>
+      <div>
+       <Router>
+         <div>
+           <Navbar />
+          <Route exact path="/" component={Home}/>
+          <Route path="/about" component={About}/>
+          <Route path="/orders" component={Orders}/>
+          <Route path="/contact" component={Contact}/> 
+          <Route path="/admin" component={Admin}/>  
+          <Route path="/login" component={LoginForm}/>  
+          <Route path="/register" component={Register}/>
+        </div>
+      </Router>
       </div>
     )
   }

@@ -1,0 +1,24 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+security:
+  basic:
+    enable: 'false   '
+server:
+  port: 8084
+shuaicj:
+  security:
+    jwt:
+      secret: otherpeopledontknowit
+spring:
+  application:
+    name: RentaCarAPIGateway
+zuul:
+  host:
+    socket-timeout-millis: 30000
+  routes:
+    accounts:
+      serviceId: account-ms
+    orders:
+      serviceId: Orders

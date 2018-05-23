@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 @ToString
 public class JwtAuthenticationConfig {
 
-    @Value("${security.jwt.url:/login}")
+    @Value("${security.jwt.url:*}")
     private String url;
 
     @Value("${security.jwt.header:Authorization}")

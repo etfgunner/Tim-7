@@ -43,10 +43,10 @@ public class JwtUsernamePasswordAuthenticationFilter extends AbstractAuthenticat
     @Override
     public Authentication attemptAuthentication(HttpServletRequest req, HttpServletResponse rsp)
             throws AuthenticationException, IOException {
-    
+    	
         User u = mapper.readValue(req.getInputStream(), User.class);
        return getAuthenticationManager().authenticate(new UsernamePasswordAuthenticationToken(
-                u.getUsername(), u.getPassword(), Collections.emptyList()
+                u.getUsername(), u.getPassword()
         ));
     }
 
@@ -62,7 +62,6 @@ public class JwtUsernamePasswordAuthenticationFilter extends AbstractAuthenticat
                 .setExpiration(Date.from(now.plusSeconds(config.getExpiration())))
                 .signWith(SignatureAlgorithm.HS256, config.getSecret().getBytes())
                 .compact();
-        System.out.println("fsafdasd"+config.getHeader());
         rsp.addHeader(config.getHeader(), config.getPrefix() + " " + token);
     }
 
@@ -72,7 +71,7 @@ public class JwtUsernamePasswordAuthenticationFilter extends AbstractAuthenticat
         private String username, password;
 
 		public Object getPassword() {
-			System.out.println(username);
+
 			return password;
 		}
 

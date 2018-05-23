@@ -68,5 +68,15 @@ public class JwtUsernamePasswordAuthenticationFilter extends AbstractAuthenticat
     @Setter
     private static class User {
         private String username, password;
+
+		public Object getPassword() {
+			System.out.println(username);
+			return password;
+		}
+
+		public Object getUsername() {
+		
+			return username;
+		}
     }
 }

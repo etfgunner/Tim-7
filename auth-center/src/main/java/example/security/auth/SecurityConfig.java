@@ -31,13 +31,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
-                .withUser("admin").password("admin").roles("ADMIN", "USER").and()
-                .withUser("test").password("test").roles("USER");
+                .withUser("admin").password("{noop}admin").roles("ADMIN", "USER").and()
+                .withUser("test").password("{noop}test").roles("USER");
     }
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-    	System.out.println("fasdf");
+
         httpSecurity
                 .csrf().disable()
                 .logout().disable()

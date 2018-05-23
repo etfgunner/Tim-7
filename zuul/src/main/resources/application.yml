@@ -13,6 +13,7 @@ zuul:
   host:
     max-total-connections: 10000
     max-per-route-connections: 50
+  ribbon-isolation-strategy: THREAD  
   routes:
    auth-center:
       path: /login/**

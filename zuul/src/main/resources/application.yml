@@ -23,7 +23,6 @@ zuul:
    accounts:
       serviceId: account-ms
    orders:
-      path: /orders/**
       serviceId: Orders
   
 security.jwt.secret: otherpeopledontknowit

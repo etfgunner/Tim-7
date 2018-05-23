@@ -19,9 +19,19 @@ zuul:
       sensitiveHeaders: Cookie,Set-Cookie
       stripPrefix: false
    accounts:
+      path: /account/**
       serviceId: account-ms
    orders:
+      path: /orders/**
       serviceId: Orders
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
       
 security.jwt.secret: otherpeopledontknowit
       

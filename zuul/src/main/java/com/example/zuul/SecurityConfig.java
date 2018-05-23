@@ -44,9 +44,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                             UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
                     .antMatchers(config.getUrl()).permitAll()
-                    .antMatchers("/backend/admin").hasRole("ADMIN")
-                    .antMatchers("/backend/user").hasRole("USER")
-                    .antMatchers("/backend/guest").permitAll();
+                    .antMatchers("/account-ms/salesman/all").hasRole("USER")
+                    .antMatchers("/account-ms/client/all").hasRole("ADMIN")
+                    .antMatchers("/account-ms/rentacaroffice/all").permitAll();
     }
 }
 

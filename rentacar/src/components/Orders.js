@@ -15,19 +15,15 @@ export default class Orders extends Component{
           }, {
             title: 'ID klijenta',
             dataIndex: 'clientId',
-            key: 'clientId',
           }, {
             title: 'Datum rezervacije',
             dataIndex: 'datumRezervacije',
-            key: 'datumRezervacije',
           }, {
             title: 'Rezervisano od',
             dataIndex: 'rezervisanoOd',
-            key: 'rezervisanoOd',
           }, {
             title: 'Rezervisano do',
             dataIndex: 'rezervisanoDo',
-            key: 'rezervisanoDo',
           }]
         };
     
@@ -67,7 +63,7 @@ export default class Orders extends Component{
     render(){
         return (
             <div>
-            <Table dataSource={this.state.rentals} columns={this.state.columns} />
+            <Table  dataSource={this.state.rentals} columns={this.state.columns} />
             </div>
         )
     }

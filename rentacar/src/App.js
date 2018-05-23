@@ -7,6 +7,8 @@ import Orders from './components/Orders';
 import Contact from './components/Contact';
 import Navbar from './components/CustomNavbar';
 import Admin from './components/Admin';
+import LoginForm from './components/LoginForm';
+import Register from './components/Register';
 
 class App extends Component {
 
@@ -23,7 +25,9 @@ class App extends Component {
           <Route path="/about" component={About}/>
           <Route path="/orders" component={Orders}/>
           <Route path="/contact" component={Contact}/> 
-          <Route path="/admin" component={Admin}/>    
+          <Route path="/admin" component={Admin}/>  
+          <Route path="/login" component={LoginForm}/>  
+          <Route path="/register" component={Register}/>
         </div>
       </Router>
       </div>

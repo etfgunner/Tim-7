@@ -6,7 +6,7 @@
 	<groupId>com.example</groupId>
 	<artifactId>account_m</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-
+	<packaging>jar</packaging>
 
 	<name>account_m</name>
 	<description>Account mikroservis</description>
@@ -68,9 +68,8 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
 			<scope>test</scope>
-</dependency>
+		</dependency>
 		
-
 	</dependencies>
 
 	
@@ -92,7 +91,9 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-
+				 <configuration>
+				    <executable>true</executable>
+  				 </configuration>
 			</plugin>
 		</plugins>
 	</build>

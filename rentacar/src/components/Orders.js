@@ -1,30 +1,59 @@
 import React, {Component} from 'react';
-import { Table} from 'antd';
+import { Table, Button, Icon, Divider} from 'antd';
 import 'antd/dist/antd.css';
+import {Link} from 'react-router-dom';
 
 export default class Orders extends Component{
     
+
+  obrisi(){
+    console.log("OBRISANO");
+  }
+  dodaj(){
+    console.log("DODANO");
+  }
     constructor(){
         super();
+
+
+
         this.state={
           rentals:[],
           columns : [{
-            title: 'Id narudžbe',
+            title: 'Order ID',
             dataIndex: 'id',
-            key: 'id',
+            rowKey: 'id',
           }, {
-            title: 'ID klijenta',
+            title: 'Vehicle ID',
+            dataIndex: 'vehicleId',
+          },{
+            title: 'Client ID',
             dataIndex: 'clientId',
           }, {
-            title: 'Datum rezervacije',
+            title: 'Reservation date',
             dataIndex: 'datumRezervacije',
           }, {
-            title: 'Rezervisano od',
+            title: 'Date start',
             dataIndex: 'rezervisanoOd',
           }, {
-            title: 'Rezervisano do',
+            title: 'Date end',
             dataIndex: 'rezervisanoDo',
-          }]
+          },{
+            title: 'Action',
+            render: (text, record) => (
+              <span>
+                <a href="javascript:;">Action 一 {record.name}</a>
+                <Divider type="vertical" />
+                <a href="javascript:obrisi()">Delete</a>
+                <Divider type="vertical" />
+                <Button onClick={this.obrisi}>Delete</Button>
+                <Divider type="vertical" />
+                <a href="javascript:;" className="ant-dropdown-link">
+                  More actions <Icon type="down" />
+                </a>
+              </span>
+            )}
+        ]
         };
     
       }
@@ -39,11 +68,12 @@ export default class Orders extends Component{
       ).then(data => {
         console.log(data);
           let rentals=data.map((rent) => {
-
+              console.log('Vehicle id: '+rent.vehicleId);
             return (
               {
                   id: rent.id,
                   clientId: rent.clientId,
+                  vehicleId: rent.vehicleId,
                   rezervisanoOd: rent.dateFrom.substring(0, 10),
                   rezervisanoDo: rent.dateTo.substring(0, 10),
                   datumRezervacije: rent.dateRented.substring(0, 10),
@@ -63,7 +93,11 @@ export default class Orders extends Component{
     render(){
         return (
             <div>
-            <Table  dataSource={this.state.rentals} columns={this.state.columns} />
+            <Link to="/addorder">
+                <Button bsStyle="primary">Add new</Button>
+            </Link> 
+            <Table  dataSource={this.state.rentals} columns={this.state.columns} >
+            </Table>
             </div>
         )
     }

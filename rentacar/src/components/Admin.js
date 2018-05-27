@@ -3,6 +3,7 @@ import { Table} from 'antd';
 import 'antd/dist/antd.css';
 import VehicleForm from './VehicleForm';
 import VehicleViewForm from './VehicleViewForm';
+import AddVehicle from './AddVehicle';
 
 export default class Admin extends Component{
 
@@ -17,12 +18,21 @@ export default class Admin extends Component{
 
     render(){
         return (
+
             <div>
+                <VehicleViewForm />
+            </div>
+
+           /* <div>
             <VehicleForm onSubmit={fields => this.onSubmit(fields)}/>
             <p> 
             	{JSON.stringify(this.state.fields, null, 2)}
             </p>
-            </div>
+            </div>*/
+
+            /*<div>
+                <AddVehicle />
+                </div>*/
 
             /*<div>
             	<VehicleViewForm />

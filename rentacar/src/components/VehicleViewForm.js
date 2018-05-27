@@ -9,32 +9,33 @@ export default class VehicleViewForm extends React.Component{
         this.state={
           rentals:[],
           columns : [{
-            title: 'Id narudžbe',
-            dataIndex: 'id',
-            key: 'id',
+            title: 'Brand',
+            dataIndex: 'brand',
+            key: 'brand',
           }, {
-            title: 'ID klijenta',
-            dataIndex: 'clientId',
-            key: 'clientId',
+            title: 'Name', 
+            dataIndex: 'name',
+            key: 'name',
           }, {
-            title: 'Datum rezervacije',
-            dataIndex: 'datumRezervacije',
-            key: 'datumRezervacije',
+            title: 'Type',
+            dataIndex: 'type',
+            key: 'type',
           }, {
-            title: 'Rezervisano od',
-            dataIndex: 'rezervisanoOd',
-            key: 'rezervisanoOd',
+            title: 'Produced year',
+            dataIndex: 'producedYear',
+            key: 'producedYear',
           }, {
-            title: 'Rezervisano do',
-            dataIndex: 'rezervisanoDo',
-            key: 'rezervisanoDo',
+            title: 'Transimission',
+            dataIndex: 'transimission',
+            key: 'transimission',
           }]
         };
     
       }
 
       componentDidMount(){
-        fetch('http://185.91.158.33:8081/rest/rentals/all')
+        //fetch('http://185.91.158.33:8084/vehicle/rest/vehicle/all')
+        fetch('http://localhost:8080/rest/vehicle/all') 
         .then(
           results => {
           console.log(results);
@@ -46,11 +47,11 @@ export default class VehicleViewForm extends React.Component{
 
             return (
               {
-                  id: rent.id,
-                  clientId: rent.clientId,
-                  rezervisanoOd: rent.dateFrom.substring(0, 10),
-                  rezervisanoDo: rent.dateTo.substring(0, 10),
-                  datumRezervacije: rent.dateRented.substring(0, 10),
+                  brand: rent.brand,
+                  name: rent.name,
+                  type: rent.type,
+                  producedYear: rent.producedYear,
+                  transimission: rent.transimission,
               }
             )
           })

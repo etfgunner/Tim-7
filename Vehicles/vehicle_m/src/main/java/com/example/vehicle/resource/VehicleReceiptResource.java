@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/rest/vehiclereceipt")
+@CrossOrigin(origins = "http://localhost:3000")
 public class VehicleReceiptResource {
 
     @Autowired

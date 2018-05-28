@@ -6,8 +6,22 @@ import {Link} from 'react-router-dom';
 export default class Orders extends Component{
     
 
-  obrisi(){
-    console.log("OBRISANO");
+  obrisi(id){
+    console.log("OBRISANO"+id);
+    console.log('Pokusaj deleta');
+    fetch('http://185.91.158.33:8081/rest/rentals/delete/'+id, {
+      method: 'delete',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    },
+      body: JSON.stringify(this.state)
+    }).then(function(response) {
+      if(response.status==200){
+        alert('Rental successfully deleted');
+        window.location.reload();
+      }
+    });
   }
   dodaj(){
     console.log("DODANO");
@@ -42,15 +56,8 @@ export default class Orders extends Component{
             title: 'Action',
             render: (text, record) => (
               <span>
-                <a href="javascript:;">Action 一 {record.name}</a>
                 <Divider type="vertical" />
-                <a href="javascript:obrisi()">Delete</a>
-                <Divider type="vertical" />
-                <Button onClick={this.obrisi}>Delete</Button>
-                <Divider type="vertical" />
-                <a href="javascript:;" className="ant-dropdown-link">
-                  More actions <Icon type="down" />
-                </a>
+                <Button onClick={() => this.obrisi(record.id)}>Delete</Button>
               </span>
             )}
         ]

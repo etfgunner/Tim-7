@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { Form, Select, Input, Button, Divider, DatePicker, InputNumber, Card } from 'antd';
+import {Grid} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -68,9 +69,8 @@ onSubmit = (e) => {
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
-        <div>
-
-        <h1>Insert new order</h1>
+        <Grid>
+          <h1>Insert new order</h1>
         <Divider type="horizontal" />
       <Form onSubmit={this.handleSubmit}>
         <FormItem
@@ -137,7 +137,7 @@ onSubmit = (e) => {
         </FormItem>
         
       </Form>
-      </div>
+      </Grid>
     );
   }
 }

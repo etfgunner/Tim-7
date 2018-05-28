@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
-import { Table} from 'antd';
+import { Table, Button, Icon, Divider} from 'antd';
+import {Link} from 'react-router-dom';
 import 'antd/dist/antd.css';
 import VehicleForm from './VehicleForm';
 import VehicleViewForm from './VehicleViewForm';
 import AddVehicle from './AddVehicle';
+import '../style/Admin.css';
 
 export default class Admin extends Component{
 
@@ -16,27 +18,21 @@ export default class Admin extends Component{
 		this.setState({fields});
 	};
 
+
     render(){
         return (
 
             <div>
-                <AddVehicle />
-            </div>
 
-           /* <div>
-            <VehicleForm onSubmit={fields => this.onSubmit(fields)}/>
-            <p> 
-            	{JSON.stringify(this.state.fields, null, 2)}
-            </p>
-            </div>*/
+            <Link to="/addVehicle">
+                <Button id="test" bsStyle="primary">Add vehicle</Button>
+            </Link> 
 
-            /*<div>
-                <AddVehicle />
-                </div>*/
+            <Link to="/allVehicles">
+                <Button id="test" bsStyle="primary">Show vehicles</Button>
+            </Link> 
 
-            /*<div>
-            	<VehicleViewForm />
-            </div>*/
+            </div>        
 
         )
     }

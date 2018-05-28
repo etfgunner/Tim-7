@@ -27,7 +27,6 @@ public class Receipt {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
-    @OneToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     private Long rental;
     private Long transactionNumber;
     @Positive

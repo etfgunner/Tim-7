@@ -1,6 +1,7 @@
 package nwt.orders.resource;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -80,6 +81,10 @@ public class ReceiptsResource {
 	@GetMapping(value="/price/{price}")
 	public List<Receipt> receiptsWithPriceLessThan(@PathVariable("price") Double price){
 		return receiptsRepository.findByPriceLessThan(price);
+	}
+	@GetMapping(value="/rental/{id}")
+	public Optional<Receipt>  receiptWithRentalId(@PathVariable("id") Long rental){
+		return receiptsRepository.findByRental(rental);
 	}
 	
 	

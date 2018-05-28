@@ -24,7 +24,6 @@ public class Returns {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @OneToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     private Long rental;
     private Date dateReturn;
     @Valid

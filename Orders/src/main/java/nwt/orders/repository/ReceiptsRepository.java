@@ -10,4 +10,5 @@ import nwt.orders.model.Receipt;
 public interface ReceiptsRepository extends JpaRepository<Receipt, Long> {
 	Optional<Receipt> findById(Long id);
 	List<Receipt> findByPriceLessThan(Double price);
+	Optional<Receipt> findByRental(Long rental);
 }

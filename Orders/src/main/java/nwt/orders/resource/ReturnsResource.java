@@ -2,6 +2,7 @@ package nwt.orders.resource;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javassist.NotFoundException;
+import nwt.orders.model.Receipt;
 import nwt.orders.model.Rental;
 import nwt.orders.model.Returns;
 import nwt.orders.model.Returns;
@@ -69,5 +71,9 @@ public class ReturnsResource {
 		@SuppressWarnings("deprecation")
 		Date date1=new Date(date.replace('-','/'));
 	    return returnsRepository.findByDateReturnBefore(date1);
+	}
+	@GetMapping(value="/rental/{id}")
+	public Optional<Returns>  receiptWithRentalId(@PathVariable("id") Long rental){
+		return returnsRepository.findByRental(rental);
 	}
 }

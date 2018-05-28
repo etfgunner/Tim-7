@@ -20,7 +20,7 @@ export default class Admin extends Component{
         return (
 
             <div>
-                <VehicleViewForm />
+                <AddVehicle />
             </div>
 
            /* <div>

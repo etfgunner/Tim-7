@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { Form, Select, Input, Button, Divider, DatePicker, InputNumber, Card } from 'antd';
+import {Grid} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -14,7 +15,8 @@ class AddVehicle extends React.Component {
       }
     });
     console.log('Pokusaj posta');
-    fetch('http://185.91.158.33:8084/vehicle/rest/vehicle/insert', {
+    //fetch('http://185.91.158.33:8081/rest/rentals/insert', {
+    fetch('http://localhost:8080/rest/vehicle/insert', {
       method: 'post',
       headers: {
         'Accept': 'application/json',
@@ -29,12 +31,14 @@ class AddVehicle extends React.Component {
   }
 
   state = {
+    id: 20,
     brand: '',
     name: '',
     type: '',
     producedYear: '',
     transmission: '',
-    color: ''
+    color: '',
+    available: true
 };
 
 onChange(date, dateString) {
@@ -56,13 +60,14 @@ onSubmit = (e) => {
   e.preventDefault();
   this.props.onSubmit(this.state);
   this.setState({
+    id: 20,
     brand: '',
     name: '',
     type: '',
     producedYear: '',
     transmission: '',
     color: '',
-    value: ''
+    available: true
   })
 };
 
@@ -70,23 +75,23 @@ onSubmit = (e) => {
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
-        <div>
-
-        <h1>Insert new vehicle</h1>
+        <Grid>
+          <h1>Insert new vehicle</h1>
         <Divider type="horizontal" />
       <Form onSubmit={this.handleSubmit}>
-
-      	<FormItem
+       
+       
+        <FormItem
           label="Brand"
           labelCol={{ span: 10 }}
           wrapperCol={{ span: 3 }}
         >
          <Input name = "brand"
               placeholder = "Brand"
-              value = {this.state.dateRented} 
+              value = {this.state.brand} 
               onChange={e => this.change(e)}/>
         </FormItem>
-
+        
         <FormItem
           label="Name"
           labelCol={{ span: 10 }}
@@ -94,18 +99,18 @@ onSubmit = (e) => {
         >
          <Input name = "name"
               placeholder = "Name"
-              value = {this.state.dateRented} 
+              value = {this.state.name} 
               onChange={e => this.change(e)}/>
         </FormItem>
-
+        
         <FormItem
           label="Type"
           labelCol={{ span: 10 }}
           wrapperCol={{ span: 3 }}
         >
          <Input name = "type"
-              placeholder = "type"
-              value = {this.state.dateRented} 
+              placeholder = "Type"
+              value = {this.state.type} 
               onChange={e => this.change(e)}/>
         </FormItem>
 
@@ -116,7 +121,7 @@ onSubmit = (e) => {
         >
             <Input min={1} max={10000} defaultValue={1}  name = "producedYear"
               placeholder = "Produced year"
-              value = {this.state.vehicleId} 
+              value = {this.state.producedYear} 
               onChange={e => this.change(e)}/>
         </FormItem>
 
@@ -127,7 +132,7 @@ onSubmit = (e) => {
         >
          <Input name = "transmission"
               placeholder = "Transmission"
-              value = {this.state.dateRented} 
+              value = {this.state.transmission} 
               onChange={e => this.change(e)}/>
         </FormItem>
 
@@ -138,18 +143,15 @@ onSubmit = (e) => {
         >
          <Input name = "color"
               placeholder = "Color"
-              value = {this.state.dateRented} 
+              value = {this.state.color} 
               onChange={e => this.change(e)}/>
         </FormItem>
-
-
-
-      
+       
         <FormItem
           wrapperCol={{ span: 12, offset: 5 }}
         >
-        <Link to="/orders">
-                <Button bsstyle="primary">Back</Button>
+        <Link to="/admin">
+                <Button bsStyle="primary">Back</Button>
             </Link>
             <Divider type="vertical" />
           <Button type="primary" htmlType="submit">
@@ -158,7 +160,7 @@ onSubmit = (e) => {
         </FormItem>
         
       </Form>
-      </div>
+      </Grid>
     );
   }
 }
@@ -166,4 +168,5 @@ onSubmit = (e) => {
 const WrappedApp = Form.create()(AddVehicle);
 
 export default WrappedApp
+
 

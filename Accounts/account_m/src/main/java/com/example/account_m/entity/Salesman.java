@@ -9,7 +9,6 @@ import java.util.Date;
 @Entity
 public class Salesman extends Person{
 
-    @Pattern(regexp="\\d{13}")
     private int JMBG;
 
     @Past

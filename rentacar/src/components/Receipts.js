@@ -3,29 +3,10 @@ import { Table, Button, Icon, Divider} from 'antd';
 import 'antd/dist/antd.css';
 import {Link} from 'react-router-dom';
 
-export default class Orders extends Component{
-    
 
-  obrisi(id){
-    console.log("OBRISANO"+id);
-    console.log('Pokusaj deleta');
-    fetch('http://185.91.158.33:8081/rest/rentals/delete/'+id, {
-      method: 'delete',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-    },
-      body: JSON.stringify(this.state)
-    }).then(function(response) {
-      if(response.status==200){
-        alert('Rental successfully deleted');
-        window.location.reload();
-      }
-    });
-  }
-  dodaj(){
-    console.log("DODANO");
-  }
+export default class Receipts extends Component{
+
+   
     constructor(){
         super();
 
@@ -59,7 +40,7 @@ export default class Orders extends Component{
                 <Divider type="vertical" />
                 <Button onClick={() => this.obrisi(record.id)}>Delete</Button>
                 <Divider type="vertical" />
-                <Link to="/receipts">
+                <Link to="/about">
                 <Button bsStyle="primary">Check receipt and return for this car</Button>
             </Link> 
               </span>

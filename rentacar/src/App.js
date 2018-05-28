@@ -12,6 +12,9 @@ import Register from './components/Register';
 import AddOrder from './components/AddOrder';
 import AddVehicle from './components/AddVehicle';
 import VehicleViewForm from './components/VehicleViewForm';
+import AddSalesman from './components/AddSalesman';
+import ClientViewForm from './components/ClientViewForm';
+import SalesmanViewForm from './components/SalesmanViewForm';
 
 
 class App extends Component {
@@ -35,7 +38,9 @@ class App extends Component {
           <Route path="/addorder" component={AddOrder}/>
           <Route path="/addVehicle" component={AddVehicle}/>
           <Route path="/allVehicles" component={VehicleViewForm}/>
-        
+          <Route path="/addSalesman" component={AddSalesman}/>
+          <Route path="/allClients" component={ClientViewForm}/>
+          <Route path="/allSalesmans" component={SalesmanViewForm}/>
         </div>
       </Router>
       </div>

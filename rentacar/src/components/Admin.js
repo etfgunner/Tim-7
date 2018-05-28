@@ -32,6 +32,18 @@ export default class Admin extends Component{
                 <Button id="test" bsStyle="primary">Show vehicles</Button>
             </Link> 
 
+            <Link to="/addSalesman">
+                <Button id="test" bsStyle="primary">Add salesman</Button>
+            </Link> 
+
+            <Link to="/allSalesmans">
+                <Button id="test" bsStyle="primary">Show salesmans</Button>
+            </Link> 
+
+            <Link to="/allClients">
+                <Button id="test" bsStyle="primary">Show clients</Button>
+            </Link> 
+
             </div>        
 
         )

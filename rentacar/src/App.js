@@ -47,7 +47,6 @@ class App extends Component {
           <Route path="/addreceipt" component={AddReceipt}/>
           <Route path="/addreturn" component={AddReturn}/>
         </div>
-        </div>
       </Router>
       </div>
     )

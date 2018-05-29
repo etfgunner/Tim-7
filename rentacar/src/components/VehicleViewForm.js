@@ -9,8 +9,8 @@ export default class VehicleViewForm extends React.Component{
   obrisi(id){
     console.log("OBRISANO"+id);
     console.log('Pokusaj deleta');
-    //fetch('http://185.91.158.33:8081/rest/rentals/delete/'+id, {
-      fetch('http://localhost:8080/rest/vehicle/delete/'+id, {
+    fetch('http://185.91.158.33:8084/vehicle/rest/vehicle/delete'+id, {
+      //fetch('http://localhost:8080/rest/vehicle/delete/'+id, {
       method: 'delete',
       headers: {
         'Accept': 'application/json',
@@ -33,6 +33,10 @@ export default class VehicleViewForm extends React.Component{
         this.state={
           rentals:[],
           columns : [{
+            title: 'Id',
+            dataIndex: 'id',
+            rowKey: 'id',
+          }, {
             title: 'Brand',
             dataIndex: 'brand',
             key: 'brand',
@@ -75,8 +79,8 @@ export default class VehicleViewForm extends React.Component{
 
 
       componentDidMount(){
-        //fetch('http://185.91.158.33:8084/vehicle/rest/vehicle/all')
-        fetch('http://localhost:8080/rest/vehicle/all') 
+        fetch('http://185.91.158.33:8084/vehicle/rest/vehicle/all')
+        //fetch('http://localhost:8080/rest/vehicle/all') 
         .then(
           results => {
           console.log(results);

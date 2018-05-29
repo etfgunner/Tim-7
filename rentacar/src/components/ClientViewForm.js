@@ -33,6 +33,10 @@ export default class ClientViewForm extends React.Component{
         this.state={
           rentals:[],
           columns : [{
+            title: 'Id',
+            dataIndex: 'id',
+            rowKey: 'id',
+          }, {
             title: 'Name',
             dataIndex: 'name',
             key: 'name',

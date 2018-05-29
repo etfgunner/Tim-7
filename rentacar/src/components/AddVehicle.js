@@ -15,8 +15,8 @@ class AddVehicle extends React.Component {
       }
     });
     console.log('Pokusaj posta');
-    //fetch('http://185.91.158.33:8081/rest/rentals/insert', {
-    fetch('http://localhost:8080/rest/vehicle/insert', {
+    fetch('http://185.91.158.33:8084/vehicle/rest/vehicle/insert', {
+    //fetch('http://localhost:8080/rest/vehicle/insert', {
       method: 'post',
       headers: {
         'Accept': 'application/json',
@@ -60,7 +60,7 @@ onSubmit = (e) => {
   e.preventDefault();
   this.props.onSubmit(this.state);
   this.setState({
-    id: 20,
+    id: 21,
     brand: '',
     name: '',
     type: '',

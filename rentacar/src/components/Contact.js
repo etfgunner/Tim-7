@@ -14,7 +14,7 @@ export default class Contact extends Component{
     render(){
         return (
             <Grid>
-          <h1>Contact us</h1>
+          <h2>Contact us</h2>
         <Divider type="horizontal" />
       <form  method="post" action="mailto:someone@example.com">
         <FormItem

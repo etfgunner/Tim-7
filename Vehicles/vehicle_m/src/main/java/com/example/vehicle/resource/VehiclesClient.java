@@ -3,6 +3,7 @@ package com.example.vehicle.resource;
 import com.example.vehicle.repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.cloud.client.discovery.DiscoveryClient;

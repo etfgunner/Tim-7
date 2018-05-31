@@ -9,7 +9,7 @@ export default class VehicleViewForm extends React.Component{
   obrisi(id){
     console.log("OBRISANO"+id);
     console.log('Pokusaj deleta');
-    fetch('http://185.91.158.33:8084/vehicle/rest/vehicle/delete'+id, {
+    fetch('http://185.91.158.33:8084/vehicle/rest/vehicle/delete/'+id, {
       //fetch('http://localhost:8080/rest/vehicle/delete/'+id, {
       method: 'delete',
       headers: {

@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import { Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete, DatePicker, InputNumber } from 'antd';
+import '../style/addSalesman.css';
 const FormItem = Form.Item;
 const Option = Select.Option;
 const AutoCompleteOption = AutoComplete.Option;
+
 
 
 class AddSalesman extends React.Component {
@@ -74,6 +76,14 @@ onSubmit = (e) => {
     confirmDirty: false,
     autoCompleteResult: [],
   };
+
+  /* <FormItem
+        {...formItemLayout}
+        label="User or Salesman"
+      >
+        <Checkbox>User</Checkbox>
+        <Checkbox>Salesman</Checkbox>
+      </FormItem>*/
 
 
   /*handleSubmit = (e) => {
@@ -153,7 +163,7 @@ onSubmit = (e) => {
     ));
 
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <Form id ="intro" onSubmit={this.handleSubmit}>
       <FormItem
           {...formItemLayout}
           label="Name"
@@ -164,7 +174,6 @@ onSubmit = (e) => {
             }],
           })(
             <Input name = "name"
-              placeholder = "Name"
               value = {this.state.name} 
               onChange={e => this.change(e)}/>
           )}
@@ -223,13 +232,9 @@ onSubmit = (e) => {
             <Input type="password" onBlur={this.handleConfirmBlur} />
           )}
         </FormItem>
-        <FormItem
-        {...formItemLayout}
-        label="User or Salesman"
-      >
-        <Checkbox>User</Checkbox>
-        <Checkbox>Salesman</Checkbox>
-      </FormItem>
+
+
+
       <FormItem
         {...formItemLayout}
         label="Birth date"

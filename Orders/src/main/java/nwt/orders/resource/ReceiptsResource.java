@@ -26,7 +26,7 @@ import nwt.orders.service.ReceiptsService;
 
 @RestController
 @RequestMapping(value="/rest/receipts")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://185.91.158.33:3000")
 public class ReceiptsResource {
 	
 	@Autowired

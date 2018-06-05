@@ -27,7 +27,7 @@ import nwt.orders.service.RentalsService;
 
 @RestController
 @RequestMapping(value="/rest/rentals")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://185.91.158.33:3000")
 public class RentalsResource {
 
 	@Autowired 

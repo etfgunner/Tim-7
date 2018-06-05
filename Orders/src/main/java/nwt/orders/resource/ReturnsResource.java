@@ -28,7 +28,7 @@ import nwt.orders.service.ReturnsService;
 
 @RestController
 @RequestMapping(value="/rest/returns")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://185.91.158.33:3000")
 public class ReturnsResource {
 
 	@Autowired

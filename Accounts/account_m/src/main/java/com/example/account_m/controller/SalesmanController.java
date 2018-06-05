@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/salesman")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://185.91.158.33:3000")
 public class SalesmanController {
 
 

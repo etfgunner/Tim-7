@@ -60,10 +60,10 @@ export default class VehicleViewForm extends React.Component{
             title: 'Color',
             dataIndex: 'color',
             key: 'color',
-          },{
+          /*},{
             title: 'Available',
             dataIndex: 'available',
-            key: 'available',
+            key: 'available',*/
           },{
             title: 'Action',
             render: (text, record) => (
@@ -106,7 +106,7 @@ export default class VehicleViewForm extends React.Component{
                   producedYear: rent.producedYear,
                   transmission: rent.transmission,
                   color: rent.color,
-                  available: this.p,
+                  //available: this.p,
               }
             )
           })

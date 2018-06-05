@@ -10,7 +10,7 @@ export default class SalesmanViewForm extends React.Component{
     console.log("OBRISANO"+id);
     console.log('Pokusaj deleta');
     //fetch('http://185.91.158.33:8081/rest/rentals/delete/'+id, {
-      fetch('http://185.91.158.33:8084/account-ms/salesman/delete'+id, {
+      fetch('http://185.91.158.33:8084/account-ms/salesman/delete/'+id, {
       method: 'delete',
       headers: {
         'Accept': 'application/json',

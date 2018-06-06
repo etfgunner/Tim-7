@@ -17,7 +17,7 @@ export default class CustomNavbar extends Component{
                 <NavItem eventKey={1} componentClass={Link}  href="/" to="/">
                 Home
                 </NavItem>
-                <NavItem eventKey={1} componentClass={Link}  href="/orders" to="/orders">
+                <NavItem className={sessionStorage.getItem('loggedRole') == 'admin' ? '' : 'hide-this-bullhit'} eventKey={1} componentClass={Link}  href="/orders" to="/orders">
                 Orders
                 </NavItem>
                 <NavItem eventKey={1} componentClass={Link}  href="/about" to="/about">
@@ -26,10 +26,10 @@ export default class CustomNavbar extends Component{
                 <NavItem eventKey={1} componentClass={Link}  href="/contact" to="/contact">
                 Contact
                 </NavItem>
-                <NavItem eventKey={1} componentClass={Link}  href="/admin" to="/admin">
+                <NavItem className={sessionStorage.getItem('loggedRole') == 'admin' ? '' : 'hide-this-bullhit'} eventKey={1} componentClass={Link}  href="/admin" to="/admin">
                 Admin
                 </NavItem>
-                <NavItem eventKey={1} componentClass={Link}  href="/login" to="/login">
+                <NavItem className={sessionStorage.getItem('loggedRole') == undefined ? '' : 'hide-this-bullhit'} eventKey={1} componentClass={Link}  href="/login" to="/login">
                 Login/Register
                 </NavItem>
                 </Nav>

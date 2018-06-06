@@ -3,3 +3,8 @@
    left:33%;
    width:420px;
 }
+
+
+.hide-this-bullhit {
+   display: none !important;
+}

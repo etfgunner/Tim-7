@@ -5,12 +5,49 @@ const FormItem = Form.Item;
 class NormalLoginForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.form.validateFields((err, values) => {
-      if (!err) {
-        console.log('Received values of form: ', values);
+      if(this.state.username == 'admin' && this.state.password == 'admin') {
+          sessionStorage.setItem('loggedRole', 'admin');
+          window.location = '/admin';
       }
-    });
+      else if(this.state.username == 'test' && this.state.password == 'test') {
+          sessionStorage.setItem('loggedRole', 'user');
+          window.location = '/home';
+      }
   }
+    state = {
+        username: '',
+        password: ''
+    }
+
+    componentDidMount() {
+        if (sessionStorage.getItem("token") !== null) window.location = "/index";
+    }
+
+    change = e => {
+        console.log('Event. '+e);
+        this.setState({
+            [e.target.name]: e.target.value
+        });
+    };
+
+    onSubmit = (e) => {
+        e.preventDefault();
+        if(this.state.username == 'admin' && this.state.password == 'admin') {
+            sessionStorage.setItem('loggedRole', 'admin');
+            window.location = '/admin';
+        }
+        else if(this.state.username == 'test' && this.state.password == 'test') {
+            sessionStorage.setItem('loggedRole', 'user');
+            window.location = '/orders';
+        }
+
+
+        this.props.onSubmit(this.state);
+        this.setState({
+            username: '',
+            password: '',
+        })
+    };
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
@@ -20,14 +57,14 @@ class NormalLoginForm extends React.Component {
           {getFieldDecorator('userName', {
             rules: [{ required: true, message: 'Please input your username!' }],
           })(
-            <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
+            <Input onKeyUp={this.change} name={'username'} prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
           )}
         </FormItem>
         <FormItem>
           {getFieldDecorator('password', {
             rules: [{ required: true, message: 'Please input your Password!' }],
           })(
-            <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
+            <Input onKeyUp={this.change} name={'password'} prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
           )}
         </FormItem>
         <FormItem>
